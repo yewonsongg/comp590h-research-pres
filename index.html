@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f2e9">
+  <meta name="description" content="An interactive, source-verified classroom presentation on agentic reasoning: acting, learning, and collaborating.">
+  <title>Agentic Reasoning — Acting · Learning · Collaborating</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="slides.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a href="#deck" class="skip-link">Skip to presentation</a>
+  <header class="app-header">
+    <a class="brand" href="#/1" aria-label="First slide"><img src="assets/mark.svg" alt="" width="25" height="25"><span>COMP 590H<span class="muted">/</span> RESEARCH BRIEFING</span></a>
+    <nav aria-label="Presentation chapters"><button data-jump="2">01 <span>Acting</span></button><button data-jump="7">02 <span>Learning</span></button><button data-jump="11">03 <span>Collaborating</span></button></nav>
+    <span class="header-meta">§ 6.5</span>
+  </header>
+  <main class="viewport" id="deck" tabindex="-1" aria-label="Presentation">
+    <div class="stage" id="stage"></div>
+  </main>
+  <footer class="app-controls">
+    <div class="slide-location"><span id="slide-count">01 / 16</span><span class="control-divider"></span><span id="chapter-name">Introduction</span></div>
+    <div class="transport"><button id="prev" title="Previous stage (←)" aria-label="Previous stage">←</button><button id="replay" title="Replay slide (R)" aria-label="Replay slide">↺</button><button id="next" class="advance" title="Next stage (→ or Space)"><span id="next-label">Begin</span> <span aria-hidden="true">→</span></button><span id="step-count" class="step-count"></span></div>
+    <div class="utilities"><button id="overview" title="Slide overview (O)" aria-label="Slide overview">▦</button><button id="notes-button" title="Speaker notes (N)" aria-label="Speaker notes">Notes</button><button id="fullscreen" title="Fullscreen (F)" aria-label="Toggle fullscreen">⛶</button><button id="help-button" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts">?</button></div>
+    <div class="progress-track"><div id="progress"></div></div>
+  </footer>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  <dialog id="notes-dialog" class="notes-dialog" aria-labelledby="notes-title"><div class="dialog-heading"><span class="eyebrow">PRESENTER NOTES</span><button data-close="notes-dialog" aria-label="Close speaker notes">×</button></div><h2 id="notes-title"></h2><p class="note-timing" id="notes-timing"></p><div id="notes-content"></div><button id="presenter-window" class="text-button">Open separate presenter window ↗</button><p class="small muted">Close with Esc or N. Presenter windows keep notes off the projected screen.</p></dialog>
+  <dialog id="overview-dialog" class="overview-dialog" aria-labelledby="overview-title"><div class="dialog-heading"><h2 id="overview-title">The argument, at a glance.</h2><button data-close="overview-dialog" aria-label="Close slide overview">×</button></div><div id="overview-grid"></div></dialog>
+  <dialog id="help-dialog" aria-labelledby="help-title"><div class="dialog-heading"><h2 id="help-title">Present at your own pace.</h2><button data-close="help-dialog" aria-label="Close keyboard shortcuts">×</button></div><dl class="shortcuts"><dt>→ / Space / Page Down</dt><dd>Reveal next stage, then next slide</dd><dt>← / Page Up</dt><dd>Previous stage, then previous slide</dd><dt>Shift + → / ←</dt><dd>Skip directly between slides</dd><dt>R / Shift + R</dt><dd>Replay slide / restart entire presentation</dd><dt>N / P</dt><dd>Notes / separate presenter window</dd><dt>O / F</dt><dd>Overview / fullscreen</dd><dt>Home / End</dt><dd>First / final slide</dd><dt>Esc</dt><dd>Close a panel or exit fullscreen</dd></dl><p class="small">Animations wait for you. The next button shows “Reveal” when a teaching step remains. Reduced motion follows your system preference. Print (Ctrl/Cmd + P) produces every completed slide.</p></dialog>
+  <noscript>This presentation requires JavaScript. The accompanying presentation.pdf provides a static version.</noscript>
+</body>
+</html>

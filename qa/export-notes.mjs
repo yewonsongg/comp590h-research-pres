@@ -1,0 +1,10 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import vm from 'node:vm';
+const script=await readFile('slides.js','utf8');
+const sandbox={};vm.createContext(sandbox);vm.runInContext(script+'\nglobalThis.content = SLIDES;',sandbox);
+const time=n=>`${Math.floor(n/60)}:${String(n%60).padStart(2,'0')}`;
+let elapsed=0;
+const total=sandbox.content.reduce((n,s)=>n+s.seconds,0);
+const notes=sandbox.content.map((s,i)=>{const start=elapsed;elapsed+=s.seconds;return `## ${String(i+1).padStart(2,'0')}. ${s.title}\n\n**${s.chapter} · ${time(s.seconds)} · cumulative ${time(start)}–${time(elapsed)} · ${s.steps} progressive reveals**\n\n${s.notes.join('\n\n')}\n`;}).join('\n');
+await writeFile('speaker-notes.md',`# Speaker notes\n\n${sandbox.content.length} slides · planned delivery ${time(total)}. Advance key stages with → or Space. The main deck displays “Reveal” when more teaching steps remain. Speaking times include pauses and brief interaction, and should be rehearsed with the actual presenter.\n\n${notes}`);
+console.log(`Exported ${sandbox.content.length} slide notes; target ${time(total)}.`);

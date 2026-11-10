@@ -1,0 +1,552 @@
+AGENTIC REASONING
+Full speaking script for the current 16-slide presentation
+Presenters: Yewon and Lucas
+
+Use this as a read-aloud script. Bracketed instructions are presentation cues;
+do not read them aloud. [NEXT] means reveal one stage with Right Arrow or
+Space. [NEXT SLIDE] means move on after completing the current slide.
+
+Start the presentation with Shift + R so all animation states are reset.
+The first benchmark bar on slide 10 appears automatically on its first visit.
+Allow roughly 18–20 minutes at 135–150 spoken words per minute, including
+pauses for the diagrams. The deck's timing estimates are rehearsal guides.
+
+========================================================================
+SLIDE 01 — Agentic reasoning
+========================================================================
+
+Today, we are looking at Section 6.5 of the survey on agentic reasoning,
+which focuses on autonomous web exploration and research agents.
+
+Our central question is: what changes when a language model can act in an
+environment, retain useful experience, and coordinate with other agents?
+
+The workbench graphic introduces three capabilities: using tools and checking
+observations, turning experience into reusable workflows, and combining
+specialized work into a shared result.
+
+We will follow that progression through acting, learning, and collaborating,
+with closer looks at Agent Workflow Memory and Agent Laboratory.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 02 — Three capabilities. One growing system.
+========================================================================
+
+The survey organizes these systems around three complementary dimensions.
+
+Foundational reasoning establishes the ability to plan, use tools, and
+retrieve information. This is the acting layer.
+
+[NEXT: reveal learning]
+
+Self-evolving reasoning adds feedback and memory, allowing experience to
+influence later behavior.
+
+[NEXT: reveal collaborating]
+
+Collective reasoning adds specialized roles and coordination. These
+capabilities can coexist: a research assistant could run an experiment,
+remember a debugging strategy, and ask another agent to review the result.
+
+Let us first look at what it means for a language model to act.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 03 — From responses to real-world tasks.
+========================================================================
+
+Section 6.5.1 introduces foundational agentic reasoning. It focuses on how
+we can build on traditional language models to create autonomous agents
+capable of completing real-world tasks.
+
+Traditional language models primarily generate responses based on the
+information they are given. But complex tasks often require multiple steps,
+external information, and interaction with different environments.
+
+[NEXT: reveal the flight-search workflow]
+
+For example, suppose we want a nonstop Raleigh-to-Boston flight for less
+than three hundred dollars on a chosen date. A language model might suggest
+an option using the information it has. An agentic system can go further:
+search the route and date, filter for nonstop flights, check current fare
+details and availability, and return options that meet the requirements.
+This is an illustrative flight search, not a verified travel offer.
+
+[NEXT: reveal the three foundational capabilities]
+
+The main point is that agents need three foundational capabilities to
+accomplish these tasks: planning, tool use, and search and retrieval.
+
+Planning organizes the travel constraints and search steps. Tool use lets
+the agent enter details and apply filters in a browser. Search and retrieval
+find flights and bring back current fare details.
+
+These capabilities work together: the agent can use a tool to search, and
+what it retrieves may change the plan.
+
+Together, these capabilities allow language models to move beyond generating
+responses and begin executing tasks. The language model can still be the
+reasoning engine within the agent.
+
+Let us continue the same flight example to see how feedback changes a plan.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 04 — Reasoning becomes a feedback loop.
+========================================================================
+
+Imagine asking an agent to find a nonstop flight from Raleigh to Boston
+for less than three hundred dollars. We have already provided the travel
+date. A suitable result must meet the route, date, and budget requirements.
+
+[NEXT: highlight Plan]
+
+The agent makes a simple plan: enter the route and date, filter for nonstop
+flights, and compare fares. This turns the goal into a few concrete steps.
+
+[NEXT: highlight Tool action]
+
+It opens a promising flight's fare details using the browser. Now it has
+taken an action in the environment rather than just describing one.
+
+[NEXT: highlight Observation]
+
+The selected fare is no longer available. A promising search result is
+not enough: the agent has to inspect what the environment actually returns.
+This observation gives it a reason to change course.
+
+[NEXT: highlight Updated plan]
+
+It refreshes the results and checks another nonstop option on the same
+date, within the same budget. The goal stays the same; the next action changes.
+
+That is the feedback loop: plan, act, observe, and adjust. This is an
+illustration, not a live flight search or booking. The route and budget
+are example requirements, not verified offers. The same pattern applies
+to web, GUI, and research agents.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 05 — Same loop. Different environments.
+========================================================================
+
+The survey applies this loop to three overlapping application families.
+
+Web agents search, navigate, and extract information from changing online
+resources. They need to select relevant evidence and decide where to look
+next.
+
+[NEXT: reveal GUI agents]
+
+GUI stands for graphical user interface. These agents operate software by
+locating elements, clicking, and typing. Grounding means connecting an
+instruction to a particular target on the screen. Even a sensible plan can
+fail if the agent clicks the wrong button.
+
+[NEXT: reveal research agents]
+
+Research agents coordinate a broader inquiry: retrieving literature,
+preparing data, running experiments, interpreting results, and writing a
+report.
+
+These families overlap. A research agent might use both web browsing and
+software interfaces. Across all three, the agent must check whether its
+actions produced the intended result.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 06 — WebVoyager: knowing is not executing.
+========================================================================
+
+To explore one example in more detail, I looked at a paper called
+WebVoyager: Building an End-to-End Web Agent with Large Multimodal Models,
+published at ACL in 2024.
+
+The researchers investigated whether a multimodal language model could
+autonomously complete tasks on real websites.
+
+WebVoyager repeats a reasoning-and-action process. It receives a task and
+observes the webpage through a screenshot, with numbered interactive
+elements and supporting text. It then reasons about its next action,
+such as clicking a button, entering text, or scrolling.
+
+After that action, an updated screenshot becomes the next observation.
+The process continues until the agent stops or reaches its step limit.
+The experiment allowed up to fifteen steps. Our drawing simplifies this
+process using the flight-search example.
+
+This combines the three foundational capabilities: planning chooses the
+next steps, tool use operates the browser, and search and retrieval locate
+the information needed for the task.
+
+[NEXT: reveal the experimental result]
+
+Across 643 tasks on fifteen real websites, the GPT-4V-based agent achieved
+59.1 percent whole-task success, judged by humans. This is an absolute
+success rate, not a relative improvement. It shows that autonomous browser
+tasks are possible, while leaving substantial room for more reliable execution.
+
+[NEXT: reveal the main insight]
+
+The biggest insight is that understanding what needs to be done differs
+from successfully carrying it out. The paper documents errors such as
+confusing nearby elements or misreading calendar numbers as element labels.
+An action can sound sensible while being applied to the wrong target.
+
+That brings us to a concrete failure-and-recovery example.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 07 — A plan must survive contact with the page.
+========================================================================
+
+Continuing the flight search, the agent chooses a promising nonstop option.
+But a cookie dialog covers the “View fare” button. It attempts a click,
+and the page does not change.
+
+If it assumes the click worked, later decisions may depend on a page state
+that never existed.
+
+[NEXT: reveal Detect the mismatch]
+
+First, compare the expected outcome with the actual observation. Did the
+fare details open?
+
+[NEXT: reveal Repair the local action]
+
+Second, repair the action: close the cookie dialog, locate “View fare”
+again, and retry.
+
+[NEXT: reveal Preserve the lesson]
+
+Third, consider whether the recovery suggests a useful strategy for later
+tasks.
+
+That last step introduces self-evolving reasoning. Recovering within one
+attempt is useful; retaining something that helps a future attempt adds
+another capability.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 08 — Experience should change the next attempt.
+========================================================================
+
+Self-evolving reasoning does not always require retraining the model. Here,
+we focus on external memory that changes the guidance available to it.
+
+The loop begins with an attempt at a task.
+
+[NEXT: highlight Feedback]
+
+Feedback supplies an outcome signal: what worked, what failed, or what
+remains unresolved?
+
+[NEXT: highlight Reflection]
+
+Reflection interprets that signal and extracts a potentially useful lesson.
+
+[NEXT: highlight Memory]
+
+Memory makes the lesson available beyond the current attempt. After a
+successful flight search, the agent retains a procedure: enter the route
+and date, apply filters, inspect fares, and check availability.
+
+[CLICK “No memory”]
+
+Without persistent workflow memory, a later task has no stored procedure
+to consult.
+
+[CLICK “Workflow memory”]
+
+With memory, it can reuse those steps for a later trip with a different
+route or date. It remembers how to search, while checking current fares
+and availability again.
+
+[NEXT: highlight Improved attempt]
+
+This illustration does not measure a performance gain. It shows the
+mechanism: experience becomes guidance for a later decision. That guidance
+still needs to fit the current environment.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 09 — Remember a procedure, not a whole episode.
+========================================================================
+
+Agent Workflow Memory, or AWM, gives this idea a concrete method. Its problem
+is that long tasks contain recurring subtasks, but agents often solve each
+task without reusing what they learned.
+
+The input is a collection of trajectories: observations and actions from
+earlier tasks.
+
+[NEXT: reveal Abstract a routine]
+
+A language model extracts reusable subroutines. It replaces example-specific
+details with variables, preserving the procedure rather than every detail
+of an episode.
+
+[NEXT: reveal Guide new actions]
+
+The workflows become text-based memory in the action-generation prompt.
+The core method provides guidance without updating the model's weights.
+
+[NEXT: reveal the variable-based example]
+
+A particular Raleigh-to-Boston search can become a reusable workflow with
+variables for the route and date. This flight example is our teaching
+adaptation of the method, not an experiment reported in the paper.
+
+The paper's own case study extends a place-finding workflow to obtain a
+postal code. It shows that a remembered routine can become a starting
+point for a more complex task.
+
+Offline AWM induces workflows from training examples. Online AWM updates
+memory during a stream of tasks, using attempts that a model evaluator
+predicts were successful. That evaluator can make mistakes, so memory
+quality remains an important limitation.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 10 — Memory helps. Read the denominator.
+========================================================================
+
+[The Mind2Web bar appears automatically.]
+
+The headline improvements are meaningful, but their denominators matter.
+
+For Mind2Web, offline AWM with GPT-4 improves cross-task step success from
+36.2 percent to 45.1 percent compared with MindAct. That is an increase of
+8.9 percentage points, or approximately 24.6 percent relative improvement.
+
+[NEXT: reveal WebArena]
+
+For WebArena, online AWM reaches 35.5 percent task success, compared with
+23.5 percent for the published BrowserGym baseline. That is 12 percentage
+points, or approximately 51.1 percent relative improvement.
+
+Relative improvement divides the change by the baseline. These bars do not
+show absolute success rates or percentage-point increases.
+
+There is also a metric difference. Mind2Web checks individual steps,
+requiring both the correct element and action. WebArena checks whole-task
+success. We should not rank the benchmarks by bar height.
+
+The paper also reports an accessibility-tree-only BrowserGym control at
+15 percent. That is a separate comparison, not the denominator for the
+51.1 percent headline. These are results in specific experimental settings.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 11 — Better targeting can hide weaker actions.
+========================================================================
+
+Looking inside the Mind2Web result reveals a useful tension. With GPT-4,
+element selection accuracy rises from 41.6 to 50.6 percent.
+
+[NEXT: reveal Action F1]
+
+However, the reported action F1 score falls from 60.6 to 57.3. F1 combines
+precision and recall for the action prediction.
+
+The authors suggest that remembered workflows can help locate a relevant
+element while encouraging an action that does not fit the current state.
+That is their interpretation, rather than a separately isolated causal test.
+
+[NEXT: reveal the design lesson]
+
+The lesson is to remember a strategy while checking whether it applies.
+The agent must sometimes depart from its stored routine.
+
+Whole-task success also remains low: 4.8 percent for AWM versus 2 percent
+for MindAct on this split. Better steps do not automatically produce
+reliable end-to-end completion.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 12 — Give each agent a job—and an interface.
+========================================================================
+
+Collective reasoning changes how the work is distributed. This diagram is
+a conceptual coordinator-and-specialists design. A role can be a separate
+model invocation with its own instructions, using the same underlying model.
+
+[NEXT: delegate to Planner]
+
+The planner defines subtasks, constraints, and completion conditions.
+
+[NEXT: delegate to Researcher]
+
+The researcher returns evidence with sources and supporting passages.
+
+[NEXT: delegate to Tool executor]
+
+The executor returns runnable code, settings, and measured outputs.
+
+[NEXT: delegate to Reviewer]
+
+The reviewer checks methods and challenges unsupported claims before the
+coordinator integrates the result.
+
+The survey describes systems with similar divisions of labor. INFOGENT,
+for example, separates navigation, extraction, and aggregation.
+
+The interface between roles matters: an agent needs to know what artifact
+to return and how it will be checked. Adding agents also adds coordination
+work, and several agents may still share the same errors.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 13 — A collaboration is a sequence of handoffs.
+========================================================================
+
+Consider an illustrative question: does image noise affect two model
+families differently? We are tracing a workflow, not reporting new results.
+
+[NEXT: reveal Planner]
+
+The planner specifies a controlled comparison: the same test set, defined
+noise levels, and repeated seeds where appropriate.
+
+[NEXT: reveal Researcher]
+
+The researcher supplies related methods and assumptions that could affect
+the comparison.
+
+[NEXT: reveal Executor]
+
+The executor returns code, exact settings, and raw results.
+
+[NEXT: reveal Reviewer]
+
+The reviewer checks whether the experiment followed the protocol and
+whether the conclusion matches the evidence.
+
+If preprocessing differs between models, the coordinator should route that
+issue back for correction. A vote among agents cannot repair an unfair
+experiment. Explicit artifacts make these handoffs inspectable.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 14 — A research assistant, organized as a lab.
+========================================================================
+
+Agent Laboratory connects literature, experiments, and reporting around a
+human-provided research idea.
+
+Its first phase is literature review, where the PhD student agent gathers
+relevant papers. These academic role names describe prompted responsibilities.
+
+[NEXT: reveal Experimentation]
+
+The experimentation phase includes planning, data preparation, execution,
+and interpretation. The mle-solver proposes or edits programs, executes
+them, scores outcomes, and reflects on errors or possible improvements.
+
+Keeping strong candidate programs helps guide further search. However,
+a high search score alone does not establish scientific validity.
+
+[NEXT: reveal Report writing]
+
+The paper-solver drafts and refines a report using accumulated artifacts.
+Persisting code, results, and interpretation connects the phases. This also
+explains why the survey discusses Agent Laboratory under memory.
+
+[NEXT: reveal Human guidance]
+
+In co-pilot mode, a human can provide feedback at subtask boundaries. The
+result is a research report and code repository that can be inspected.
+
+The next question is whether the system can reliably judge the quality
+of what it produces.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 15 — A convincing report can fool its reviewer.
+========================================================================
+
+Agent Laboratory's autonomous evaluation generated fifteen papers: five
+research questions using three model backends. Ten volunteer PhD students
+each reviewed three randomly assigned papers.
+
+[NEXT: reveal the review-score chart]
+
+Automated reviewers gave an average overall score of 6.1 out of ten.
+Human reviewers gave 3.8. That is a gap of 2.3 score points.
+
+These are paper-review scores, not success rates or acceptance probabilities.
+The finding shows why a reviewer agent should itself be evaluated. Model
+approval is not automatically independent evidence of research quality.
+
+[NEXT: reveal co-pilot results]
+
+External reviewers gave co-pilot reports an overall score of 4.38, compared
+with 3.8 for autonomous reports. Improvements were stronger in quality and
+presentation than in significance or contribution.
+
+This small, task-specific comparison does not isolate a causal effect of
+human feedback. The paper also documents hallucinated experiment details
+and execution failures.
+
+The useful takeaway is that automating research assistance does not remove
+the need for credible evaluation.
+
+[NEXT SLIDE]
+
+========================================================================
+SLIDE 16 — Add capabilities. Keep the evidence loop.
+========================================================================
+
+We can now connect the three dimensions. Foundational reasoning lets an
+agent interact with tools and check outcomes.
+
+[NEXT: reveal Self-evolving]
+
+Self-evolving reasoning adds persistent adaptation, allowing experience to
+inform a later task.
+
+[NEXT: reveal Collective]
+
+Collective reasoning adds specialized work and coordination. This table
+shows a combined design; multiple agents do not inherently require memory.
+
+Our three takeaways are: verify what actions achieve, check what memory
+preserves, and evaluate the reviewers as well as the outputs.
+
+Acting, learning, and collaborating expand an agent's capabilities. Their
+value ultimately depends on evidence that the system achieved its goal.
+
+[END — no further slide]
+
+========================================================================
+SOURCE LINKS — for preparation; not part of the spoken script
+========================================================================
+
+Assigned survey, Section 6.5, pages 57–64:
+https://arxiv.org/pdf/2601.12538v2
+
+WebVoyager; especially Sections 3 and 5, Table 1, and error analysis:
+https://arxiv.org/html/2401.13919v4
+
+Agent Workflow Memory; especially Sections 2–3 and Tables 1 and 3:
+https://arxiv.org/html/2409.07429v1
+
+Agent Laboratory; especially Sections 3, 4.1, and 4.2:
+https://arxiv.org/html/2501.04227v2
+
+Additional verification details are in bibliography.md.

@@ -1,0 +1,473 @@
+{
+  "date": "2026-11-10",
+  "browser": "Chrome (installed desktop browser)",
+  "offline": true,
+  "viewport": "1920×1080",
+  "checks": [
+    {
+      "name": "16 slides rendered",
+      "pass": true
+    },
+    {
+      "name": "WebVoyager appears between the environment and recovery slides",
+      "pass": true
+    },
+    {
+      "name": "Removed discussion slide is absent",
+      "pass": true
+    },
+    {
+      "name": "Speaking plan within 15–20 minutes",
+      "pass": true,
+      "detail": 1170
+    },
+    {
+      "name": "All element IDs are unique",
+      "pass": true
+    },
+    {
+      "name": "First benchmark bar starts on initial slide entry",
+      "pass": true
+    },
+    {
+      "name": "Entire presentation restarts",
+      "pass": true
+    },
+    {
+      "name": "Slide 1: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 1: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 1: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 1: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 2: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 2: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 2: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 2: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 3: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 3: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 3: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 3: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 4: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 4: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 4: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 4: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 5: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 5: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 5: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 5: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 6: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 6: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 6: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 6: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 7: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 7: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 7: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 7: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 8: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 8: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 8: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 8: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 9: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 9: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 9: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 9: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 10: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 10: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 10: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 10: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 11: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 11: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 11: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 11: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 12: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 12: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 12: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 12: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 13: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 13: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 13: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 13: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 14: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 14: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 14: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 14: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 15: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 15: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 15: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 15: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Slide 16: content fits before footer",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 16: all stages and notes",
+      "pass": true
+    },
+    {
+      "name": "Slide 16: SVG labels fit their nodes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Slide 16: closing line has clear spacing",
+      "pass": true
+    },
+    {
+      "name": "Arrow key advances reasoning stage",
+      "pass": true
+    },
+    {
+      "name": "Space advances reasoning stage",
+      "pass": true
+    },
+    {
+      "name": "Left arrow reverses a stage",
+      "pass": true
+    },
+    {
+      "name": "Replay resets reasoning nodes",
+      "pass": true
+    },
+    {
+      "name": "Shift-arrow skips directly to next slide",
+      "pass": true
+    },
+    {
+      "name": "Revisit previous slide displays completed stages",
+      "pass": true
+    },
+    {
+      "name": "Notes panel opens and has current slide notes",
+      "pass": true
+    },
+    {
+      "name": "Escape closes notes",
+      "pass": true
+    },
+    {
+      "name": "Overview contains all slides",
+      "pass": true
+    },
+    {
+      "name": "Overview navigates and closes",
+      "pass": true
+    },
+    {
+      "name": "Memory off changes future guidance",
+      "pass": true
+    },
+    {
+      "name": "Memory on recalls stored flight-search routine",
+      "pass": true
+    },
+    {
+      "name": "Chart tooltip works with keyboard focus",
+      "pass": true
+    },
+    {
+      "name": "Chart replay resets bars",
+      "pass": true
+    },
+    {
+      "name": "Network stage highlights delegated role",
+      "pass": true
+    },
+    {
+      "name": "Separate presenter window shows current notes",
+      "pass": true
+    },
+    {
+      "name": "Presenter window controls main deck",
+      "pass": true
+    },
+    {
+      "name": "Fullscreen enters",
+      "pass": true
+    },
+    {
+      "name": "Fullscreen exits",
+      "pass": true
+    },
+    {
+      "name": "End jumps to final synthesis",
+      "pass": true
+    },
+    {
+      "name": "Final slide completes without advancing beyond the deck",
+      "pass": true
+    },
+    {
+      "name": "Home jumps to title",
+      "pass": true
+    },
+    {
+      "name": "16:9 stage fits 1366×768",
+      "pass": true
+    },
+    {
+      "name": "16:9 stage fits 1024×768",
+      "pass": true
+    },
+    {
+      "name": "16:9 stage fits 390×844",
+      "pass": true
+    },
+    {
+      "name": "Benchmark bar has an intermediate animation state",
+      "pass": true
+    },
+    {
+      "name": "Benchmark animation reaches exact final width",
+      "pass": true
+    },
+    {
+      "name": "Memory animation finishes at selected stage",
+      "pass": true
+    },
+    {
+      "name": "Animated mode reaches visible state",
+      "pass": true
+    },
+    {
+      "name": "Network signal animation finishes",
+      "pass": true
+    },
+    {
+      "name": "Reduced motion disables transitions",
+      "pass": true
+    },
+    {
+      "name": "All runtime resources work offline",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "No JavaScript errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Print completes every progressive reveal",
+      "pass": true
+    },
+    {
+      "name": "PDF contains exactly 16 pages",
+      "pass": true
+    },
+    {
+      "name": "PDF uses widescreen pages",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "externalRequests": []
+}

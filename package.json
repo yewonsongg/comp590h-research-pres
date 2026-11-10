@@ -1,0 +1,14 @@
+{
+  "name": "agentic-reasoning-presentation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline interactive research presentation on survey Section 6.5",
+  "scripts": {
+    "verify": "node qa/verify.mjs",
+    "notes": "node qa/export-notes.mjs",
+    "package": "powershell -NoProfile -ExecutionPolicy Bypass -File qa/package.ps1"
+  },
+  "devDependencies": {
+    "playwright-core": "1.65.0"
+  }
+}
