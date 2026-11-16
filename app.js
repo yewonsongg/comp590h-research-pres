@@ -37,11 +37,11 @@
     }
     if(data.kind==='memory')updateMemory(step,section);
     if(data.kind==='network'){
-      $('[data-network-title]',section).textContent=['One goal, shared state.','First, define the work.','Then, gather evidence.','Make the test executable.','Challenge, then integrate.'][step];
+      $('[data-network-title]',section).textContent=['Start with an evidence need.','Find candidate sources.','Extract support for each claim.','Synthesize the evidence.','Search again for the missing piece.'][step];
     }
     const localNext = $('[data-advance]',section);
     if(localNext){
-      localNext.textContent=step===data.steps?'Continue to next slide →':data.kind==='network'?'Delegate next role →':data.kind==='memory'?'Advance learning loop →':'Advance loop →';
+      localNext.textContent=step===data.steps?'Continue to next slide →':data.kind==='network'?'Show next role →':data.kind==='memory'?'Advance learning loop →':'Advance loop →';
     }
   }
   function updateMemory(step,section){

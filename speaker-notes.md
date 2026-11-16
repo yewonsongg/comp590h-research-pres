@@ -84,77 +84,77 @@ Several mechanisms in Section 6.5 target these issues: compressed observations r
 
 The key distinction for the next section is between recovering during this attempt and changing what the agent can reuse in a future attempt. The latter is the self-evolving dimension.
 
-## 08. Experience should change the next attempt.
+## 08. AWM turns one web task into guidance for the next.
 
 **02 · Learning · 1:25 · cumulative 8:15–9:40 · 4 progressive reveals**
 
-Self-evolving is broader than retraining the model. Here the mechanism is an external memory that changes what the agent receives in context. Other systems in the section update policies through training. We are focusing on the persistent-memory case.
+Section 6.5.2 asks what changes after a web agent finishes one task. AWM is the concrete example: it keeps an external, text-based workflow memory rather than relying only on the current prompt. This differs from retraining the model.
 
-Advance through the loop. Feedback supplies an outcome signal. Reflection interprets it. After a successful flight search, memory retains the procedure: enter the route and date, apply filters, inspect fares, and check availability. A later trip can reuse those steps with a different route and date.
+Advance through the loop. The agent attempts a task, sees an outcome, reflects on what mattered, and stores a reusable procedure. The flight search is illustrative: a successful attempt records how to enter the route and date, apply filters, inspect fares, and confirm availability.
 
-At the memory stage, toggle No memory, then Workflow memory. Without persistent memory, the later task lacks the stored procedure. With it, the agent has a starting strategy. Reuse the search steps, not a stale price or availability claim: fares must be checked again. There is no measured time saving or guaranteed success in this illustration.
+At the memory stage, toggle No memory, then Workflow memory. Without memory, the later task rebuilds its plan. With memory, it begins with a relevant workflow. It reuses the search procedure, not an old fare: the agent must still inspect the live page.
 
-Reflection and memory are distinct: writing a critique does not make it available tomorrow. A useful memory must be retained, relevant, and accurate. In the next slide, AWM gives this general idea a concrete architecture.
+This is the distinction to remember: reflection identifies a lesson during one attempt; memory makes that lesson available later. The next slide shows how AWM converts a particular trajectory into a general procedure.
 
-## 09. Remember a procedure, not a whole episode.
+## 09. A reusable workflow keeps the steps, not the old answer.
 
 **02 · Learning · 1:30 · cumulative 9:40–11:10 · 3 progressive reveals**
 
-The research problem is procedural reuse. A whole successful browsing episode contains details that may be irrelevant to the next task. AWM instead induces reusable subroutines, replacing concrete values with variables. A workflow includes a description plus steps containing state descriptions, reasoning, and actions.
+AWM addresses procedural reuse. A full browsing episode includes details that the next task does not need. Its workflow preserves the useful pattern while replacing task-specific values with variables.
 
-Advance through induction and use. The language model extracts a routine, and that routine is integrated into text-based memory used in the action-generation prompt. This is inference-time guidance; the central method does not require changing the backbone model weights. Do not describe it as always executing a rigid script.
+Advance through induction and use. AWM extracts a routine from a trajectory, then inserts that text into the prompt that produces later actions. The memory guides the model at inference time. It does not force the agent to replay an old script or require a weight update.
 
-The offline version constructs memory from training examples. The online version streams test tasks, uses a model-based success evaluator, and induces workflows from attempts predicted successful. A mistaken evaluator can therefore admit a faulty workflow.
+The online variant adds memory from attempts that a model evaluator predicts were successful. That is useful, but it creates a practical risk: an incorrect evaluator can store a bad workflow.
 
-Reveal the variable-based flight example, which is our teaching adaptation of AWM’s abstraction mechanism. A particular Raleigh-to-Boston search becomes a workflow with route and date variables. This is not a reported flight experiment. The paper’s own composition case study extends a place-finding routine to obtain a postal code. It illustrates how a reusable prefix can be extended rather than copying an entire earlier answer. Transition: how much did AWM help in the actual experiments?
+Reveal the flight workflow. This is a teaching adaptation, not an AWM experiment. The paper’s own composition case extends a place-finding workflow to retrieve a postal code. Both illustrate the same idea: use a remembered routine as a starting point, then adapt it to the current task. Transition: how much did this help in the reported experiments?
 
-## 10. Memory helps. Read the denominator.
+## 10. AWM gains appear in two different kinds of task.
 
 **02 · Learning · 1:25 · cumulative 11:10–12:35 · 2 progressive reveals**
 
-The bars show the abstract headline numbers, verified against the original tables. Mind2Web animates on first entry; use Replay to restart it manually. In the GPT-4 cross-task experiment, offline AWM improves step success from 36.2 percent to 45.1 percent compared with MindAct. That is 8.9 percentage points, or approximately 24.6 percent relative improvement.
+The first result answers a step-level question. In the GPT-4 cross-task Mind2Web experiment, offline AWM improves step success from 36.2 percent to 45.1 percent compared with MindAct. That is 8.9 percentage points, or about 24.6 percent relative improvement.
 
-Advance for WebArena. Online AWM reaches 35.5 percent task success versus 23.5 percent for the published BrowserGym baseline. That difference is 12 percentage points and approximately 51.1 percent relative improvement. These are rounded reported rates. Hover or focus a bar to see the calculation.
+Advance for the end-to-end result. On WebArena, online AWM reaches 35.5 percent task success versus 23.5 percent for the published BrowserGym baseline. That is 12 percentage points, or about 51.1 percent relative improvement.
 
-Mind2Web scores a step as successful only when both the selected element and action are correct. WebArena checks whole-task functional success. The bars therefore do not measure the same outcome. Also, Table 1 reports a separate accessibility-tree-only BrowserGym control at 15.0 percent: it is not the denominator behind the 51.1 percent headline.
+Do not compare bar height as if both results measure the same thing. Mind2Web checks whether the agent completed a step, including the element and action. WebArena checks whether it completed the whole task. The 15 percent accessibility-tree-only BrowserGym control is a separate comparison, not the denominator here.
 
-The WebArena result still leaves most tasks unsolved, and the paper does not provide uncertainty intervals with these headline comparisons. This is promising evidence in specific settings, not a universal performance multiplier. Transition: decomposing a metric reveals a more interesting story.
+The practical message is modest: workflow memory helped in these settings, but even the stronger end-to-end result leaves most tasks unsolved. Next, look at the other forms of self-improvement that the survey groups with memory.
 
-## 11. Better targeting can hide weaker actions.
+## 11. Self-evolving agents improve in more than one way.
 
-**02 · Learning · 1:05 · cumulative 12:35–13:40 · 2 progressive reveals**
+**02 · Learning · 1:05 · cumulative 12:35–13:40 · 3 progressive reveals**
 
-Here is the deeper insight from AWM. The overall improvement is not uniform across skills. In Table 3 with GPT-4, element accuracy rises by nine points, from 41.6 to 50.6. But action F1 falls from 60.6 to 57.3. F1 combines precision and recall of the predicted action; it is a different measure from element accuracy.
+AWM is the detailed memory example, but Section 6.5.2 is broader. The survey also treats reflections, validation signals, GUI repair, and research execution outcomes as ways to make later behavior better.
 
-Reveal the lower metric. The authors suggest that a workflow can help the agent identify a relevant element while biasing it toward an action that is inappropriate for the present state. Treat that explanation as their interpretation, not a separately isolated causal experiment.
+ReAP stores and retrieves a reflection from a prior web-navigation task. It turns a lesson such as a successful or failed navigation strategy into prompt guidance for another task.
 
-Reveal the design lesson. A useful agent must learn when to depart from remembered guidance. The online version has another risk: an LLM evaluator may judge an unsuccessful attempt successful, allowing an incorrect workflow into memory. Finally, whole-task success on this Mind2Web split remains only 4.8 percent for AWM versus 2.0 percent for MindAct.
+For GUI agents, Mobile-Agent-E has an Action Reflector and a Notetaker. They evaluate executed steps and add practical Tips and Shortcuts to persistent memory. For research agents, Dolphin runs generated code, then uses exceptions and benchmark outcomes to revise its next idea or implementation.
 
-Transition: memory changes what one agent brings to a task. Collaboration changes how the work itself is distributed.
+The common rule is simple: an agent has not evolved merely because it produced a critique. An earlier outcome must leave a trace that changes a later decision. Transition: collective reasoning changes who performs the work within one task.
 
-## 12. Give each agent a job—and an interface.
+## 12. INFOGENT assigns three jobs to one web question.
 
 **03 · Collaborating · 1:05 · cumulative 13:40–14:45 · 4 progressive reveals**
 
-This network is a conceptual coordinator–specialist design, not a reproduction of one named system. Each advance assigns a role and animates information moving out and back. A role can be implemented by a separate model invocation with its own instructions and context; it does not necessarily mean a different underlying model.
+Section 6.5.3 shifts the question from learning across attempts to dividing work inside one attempt. INFOGENT is the clearest web example: it assigns navigation, evidence extraction, and aggregation to distinct roles.
 
-The section provides concrete examples of division of labor. INFOGENT uses Navigator, Extractor, and Aggregator roles with feedback to navigation. GUI systems divide planning, perception, operation, reflection, and note taking. Research teams exchange code, evidence, and manuscripts.
+Advance through the roles. The Navigator finds pages, the Extractor returns passages, and the Aggregator writes an answer from that evidence. This division matters because a fluent summary without supporting passages is not a useful research artifact.
 
-The interface matters as much as the role label. What exactly must a researcher return? A source and its supporting passage are more useful than an unsupported conclusion. What can a reviewer reject? A measurable completion condition makes the check meaningful.
+The last stage is the important feedback path. When the Aggregator identifies an information gap, it sends the task back to navigation. The system therefore does not simply pass a document down a fixed assembly line.
 
-More agents add coordination work and may share the same model errors. Independent-looking opinions are not independent evidence. Transition: follow one concrete scientific question through these handoffs.
+Other systems use different role boundaries: WebPilot separates global planning from local MCTS executors, while GUI agents often separate planning, perception, action, reflection, and note taking. More agents also add coordination cost and can repeat the same error. Transition: trace the specific artifacts in an INFOGENT-style handoff.
 
-## 13. A collaboration is a sequence of handoffs.
+## 13. A web-research team passes evidence, not just conclusions.
 
 **03 · Collaborating · 1:00 · cumulative 14:45–15:45 · 4 progressive reveals**
 
-This is an illustrative experiment, not a claim about new experimental results. We ask whether two model families respond differently to image noise. The planner proposes controls: identical test data and perturbations, a defined performance metric, and repeated seeds where appropriate.
+This is an illustrative walkthrough, not a reported INFOGENT trajectory. It applies the role structure to the question we just discussed: which self-evolving systems reuse prior experience?
 
-Advance through the handoffs. The researcher supplies related work and assumptions that might affect the comparison. The executor returns runnable code and raw measurements. The reviewer checks whether the experiment actually followed the plan and whether the written claim matches those measurements.
+Advance through the handoffs. The Navigator produces a search set. The Extractor supplies the particular source passages. The Aggregator can then distinguish workflow memory, retrieved reflections, GUI tips, and execution feedback without treating them as one mechanism.
 
-If the reviewer identifies different preprocessing across models, another discussion round is less useful than checking and correcting the preprocessing. The coordinator routes that concrete issue back to the executor.
+The final handoff is a gap report, not a vote. If the source does not support a claim, the right next action is to retrieve better evidence, not to ask another agent to restate the conclusion.
 
-This example illustrates why explicit artifacts matter. Natural-language agreement can conceal a shared mistake. Transition: Agent Laboratory operationalizes several of these roles in an end-to-end research-assistance workflow, including points where a human can intervene.
+This is why interfaces matter in collective reasoning: the output of one role becomes a checkable input for the next. Transition: Agent Laboratory applies the same principle to literature, experiments, and writing.
 
 ## 14. A research assistant, organized as a lab.
 
@@ -164,7 +164,7 @@ Agent Laboratory addresses the integration problem: a promising idea requires li
 
 Reveal experimentation. Planning and data preparation precede execution. The mle-solver proposes or edits programs, executes them, scores outcomes, reflects on errors or improvements, and retains strong candidate programs. Its score is a search signal; it is not itself proof of scientific validity.
 
-Reveal report writing. The paper-solver turns the accumulated research into a report and iteratively refines it. Code, results, and interpretation persist across phases, which is why the survey also discusses this system under memory. The primary paper makes its specialized roles explicit, connecting it to our collaboration theme.
+Reveal report writing. The paper-solver turns the accumulated research into a report and iteratively refines it. Code, results, and interpretation persist across phases, which is why the survey names this system under memory in Section 6.5.2. Its specialized roles make it a useful supporting example for collaboration, even though the survey does not name it in Section 6.5.3.
 
 Reveal human guidance. In co-pilot mode, a researcher can provide feedback at the end of each subtask. The paper studies different model backends and human evaluations rather than demonstrating unrestricted autonomous science. The output is a research-assistance artifact that needs inspection. Transition: the most revealing experiment asks who is judging the result.
 
