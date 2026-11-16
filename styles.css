@@ -72,3 +72,8 @@
 .voyager-insight{border-left:3px solid var(--clay);padding-left:24px;margin-top:24px}
 .voyager-insight h3{font-size:33px}
 .voyager-insight p{font-size:22px;line-height:1.4;color:var(--muted);margin-top:9px}
+#notes-content ul,#notes-content ol{font-size:17px;line-height:1.65;padding-left:24px;margin:0 0 18px}
+#notes-content li>ul,#notes-content li>ol{margin-bottom:0}
+#notes-content h3{font-size:22px;margin:24px 0 12px}
+#notes-content table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5;margin-bottom:18px;table-layout:fixed}
+#notes-content th,#notes-content td{padding:8px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);overflow-wrap:anywhere}

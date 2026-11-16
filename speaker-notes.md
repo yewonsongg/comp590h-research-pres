@@ -83,6 +83,7 @@ Advance through detection, repair, and preservation. Detection compares expected
 Several mechanisms in Section 6.5 target these issues: compressed observations reduce irrelevant context; retrieval supplies prior trajectories; reflection modules inspect failures. These mechanisms are not guarantees. A model can misread feedback or store a bad lesson.
 
 The key distinction for the next section is between recovering during this attempt and changing what the agent can reuse in a future attempt. The latter is the self-evolving dimension.
+ agent can reuse in a future attempt. The latter is the self-evolving dimension.
 
 ## 08. AWM turns one web task into guidance for the next.
 

@@ -132,11 +132,42 @@
     d.showModal();
   }
   function closeDialog(id){$(`#${id}`).close();if(lastFocus?.isConnected)lastFocus.focus();}
+  function notesHTML(s){
+    if(s.notesFormat!=='markdown')return s.notes.map(p=>`<p>${p}</p>`).join('');
+    const inline=text=>safe(text).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    const listItem=line=>line.match(/^(\s*)(-|\d+\.)\s+(.*)$/);
+    const listHTML=(lines,start=0)=>{
+      const first=listItem(lines[start]),indent=first[1].length,tag=first[2]==='-'?'ul':'ol';
+      let html=`<${tag}>`,i=start;
+      while(i<lines.length){
+        const item=listItem(lines[i]);
+        if(!item||item[1].length!==indent)break;
+        html+=`<li>${inline(item[3])}`;i++;
+        while(i<lines.length&&listItem(lines[i])?.[1].length>indent){
+          const nested=listHTML(lines,i);html+=nested.html;i=nested.next;
+        }
+        html+='</li>';
+      }
+      return {html:html+`</${tag}>`,next:i};
+    };
+    return s.notes.map(block=>{
+      const heading=block.match(/^(#{1,6})\s+(.+)$/);
+      if(heading){const level=Math.max(3,heading[1].length);return `<h${level}>${inline(heading[2])}</h${level}>`;}
+      const lines=block.split('\n');
+      if(listItem(lines[0]))return listHTML(lines).html;
+      if(lines[0].startsWith('|')&&/^\|[\s:|\-]+\|$/.test(lines[1]||'')){
+        const cells=line=>line.trim().slice(1,-1).split('|').map(cell=>inline(cell.trim()));
+        const row=(line,tag)=>`<tr>${cells(line).map(cell=>`<${tag}>${cell}</${tag}>`).join('')}</tr>`;
+        return `<table><thead>${row(lines[0],'th')}</thead><tbody>${lines.slice(2).map(line=>row(line,'td')).join('')}</tbody></table>`;
+      }
+      return `<p>${inline(block)}</p>`;
+    }).join('');
+  }
   function updateNotes(){
     const s=SLIDES[index],before=SLIDES.slice(0,index).reduce((n,s)=>n+s.seconds,0);
     $('#notes-title').textContent=`${pad(index+1)} / ${s.title}`;
     $('#notes-timing').textContent=`${formatTime(s.seconds)} on this slide · cumulative ${formatTime(before)}–${formatTime(before+s.seconds)} · ${formatTime(totalSeconds)} total`;
-    $('#notes-content').innerHTML=s.notes.map(p=>`<p>${p}</p>`).join('');
+    $('#notes-content').innerHTML=notesHTML(s);
   }
   function renderOverview(){
     $('#overview-grid').innerHTML=SLIDES.map((s,i)=>`<button class="overview-tile" data-goto="${i}" aria-current="${i===index}"><span>${pad(i+1)} / ${formatTime(s.seconds)}</span>${s.title}</button>`).join('');
@@ -152,6 +183,9 @@
     presenterStarted=Date.now();
     presenter.document.write(`<!doctype html><html lang="en"><head><title>Presenter · Agentic Reasoning</title><meta charset="utf-8"><style>*{box-sizing:border-box}body{margin:0;background:#f5f2e9;color:#203c34;font-family:'Segoe UI',Arial,sans-serif;padding:30px}header{display:flex;justify-content:space-between;border-bottom:1px solid #d5d9cd;padding-bottom:20px;font-size:13px;letter-spacing:1px}h1{font:40px/1.15 Georgia,serif;max-width:900px;margin:24px 0 12px}#timing{color:#29685e;font-size:14px}main{display:grid;grid-template-columns:1.7fr 1fr;gap:35px;margin-top:26px}#speaker p{font-size:19px;line-height:1.6;margin:0 0 19px}aside{border-left:1px solid #d5d9cd;padding-left:25px}aside h2{font:25px Georgia,serif}aside p{font-size:17px;line-height:1.6}button{padding:12px 18px;background:#203c34;color:#f5f2e9;border:0;cursor:pointer;font-size:14px;margin:0 8px 12px 0}#current-stage{color:#29685e}footer{margin-top:20px;font-size:13px;color:#66716a}</style></head><body><header><span>AGENTIC REASONING / PRESENTER</span><span id="elapsed">0:00</span></header><h1 id="title"></h1><div id="timing"></div><main><div id="speaker"></div><aside><h2>Current teaching stage</h2><p id="current-stage"></p><h2>Up next</h2><p id="up-next"></p><button id="back">← Previous</button><button id="forward">Next stage →</button><button id="restart">Replay slide</button><button id="reset-timer">Reset timer</button><footer>Arrow keys / Space advance the main deck. Keep this window on your own screen; project the presentation window. Notes remain available if this popup is closed.</footer></aside></main></body></html>`);
     presenter.document.close();
+    const notesStyle=presenter.document.createElement('style');
+    notesStyle.textContent='#speaker ul,#speaker ol{font-size:19px;line-height:1.6;padding-left:24px;margin:0 0 19px}#speaker li>ul,#speaker li>ol{margin-bottom:0}#speaker h3{font:26px Georgia,serif;margin:24px 0 12px}#speaker table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;table-layout:fixed;margin-bottom:19px}#speaker th,#speaker td{padding:8px;text-align:left;vertical-align:top;border-bottom:1px solid #d5d9cd;overflow-wrap:anywhere}';
+    presenter.document.head.append(notesStyle);
     presenter.document.getElementById('back').onclick=previous;
     presenter.document.getElementById('forward').onclick=advance;
     presenter.document.getElementById('restart').onclick=replay;
@@ -170,7 +204,7 @@
       const d=presenter.document,s=SLIDES[index];
       d.getElementById('title').textContent=`${pad(index+1)} / ${s.title}`;
       d.getElementById('timing').textContent=$('#notes-timing').textContent;
-      d.getElementById('speaker').innerHTML=s.notes.map(p=>`<p>${p}</p>`).join('');
+      d.getElementById('speaker').innerHTML=notesHTML(s);
       d.getElementById('current-stage').textContent=s.messages?s.messages[states[index]][0]:`${states[index]} of ${s.steps} progressive reveals shown.`;
       d.getElementById('up-next').textContent=SLIDES[index+1]?.title||'End of presentation.';
     }catch{/* Main deck remains usable if the presenter window navigates away. */}
